@@ -7,13 +7,7 @@ pipeline{
     }
 
     stages{
-        stage('delete old containers'){
-            steps{
-               bat "for /f \"tokens=*\" %%i in ('docker ps -q') do docker rm -f %%i"
-
-            }
-        }
-
+        
         stage('build docker image'){
             steps{
                 bat 'docker build -t %IMAGE_NAME%:%TAG% .'
