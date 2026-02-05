@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
 
     environment{
@@ -7,30 +7,23 @@ pipeline{
     }
 
     stages{
-        stage('Delete Old Containers'){
+        stage('delete old containers'){
             steps{
-                bat '''
-                docker rm -f $(docker ps -q) || exit 0
-
-                '''
+                bat 'docker rm -f $(docker ps -q) || exit 0'
             }
         }
 
-        stage('Build Docker Image'){
+        stage('build docker image'){
             steps{
-                bat '''
-                docker build -t %IMAGE_NAME%:%TAG% .
-                '''
+                bat 'docker build -t %IMAGE_NAME%:%TAG% .'
             }
         }
 
-        stage('Push Versioned Image'){
+        stage('push docker image to dockerhub'){
             steps{
-                bat '''
-                docker push %IMAGE_NAME%:%TAG%
-
-                '''
+                bat 'docker push %IMAGE_NAME%:%TAG%'
             }
         }
+
     }
 }
