@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
 
     environment{
@@ -7,7 +7,6 @@ pipeline{
     }
 
     stages{
-        
         stage('build docker image'){
             steps{
                 bat 'docker build -t %IMAGE_NAME%:%TAG% .'
