@@ -1,13 +1,13 @@
-pipeline {
+pipeline{
     agent any
 
     environment{
-        IMAGE_NAME: "ssm0712/myapp"
-        TAG: "${BUILD_NUMBER}"
+        IMAGE_NAME = "ssm0712/myapp"
+        TAG = "${BUILD_NUMBER}"
     }
 
     stages{
-        stage('Delete old containers'){
+        stage('Delete Old Containers'){
             steps{
                 bat '''
                 docker rm -f $(docker ps -q) || exit 0
@@ -15,7 +15,8 @@ pipeline {
                 '''
             }
         }
-        stage('Build docker image'){
+
+        stage('Build Docker Image'){
             steps{
                 bat '''
                 docker build -t %IMAGE_NAME%:%TAG%
@@ -23,11 +24,11 @@ pipeline {
             }
         }
 
-        stage('Push versioned docker image'){
+        stage('Push Versioned Image'){
             steps{
                 bat '''
                 docker push %IMAGE_NAME%:%TAG%
-                
+
                 '''
             }
         }
