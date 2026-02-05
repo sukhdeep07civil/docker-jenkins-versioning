@@ -9,7 +9,7 @@ pipeline {
     stages{
         stage('delete old containers'){
             steps{
-                bat 'docker rm -f $(docker ps -q) || exit 0'
+                bat 'for /f "tokens=*" %%i in (''docker ps -q'') do docker rm -f %%i'
             }
         }
 
