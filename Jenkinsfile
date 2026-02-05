@@ -11,7 +11,6 @@ pipeline{
             steps{
                 bat '''
                 docker rm -f $(docker ps -q) || exit 0
-
                 '''
             }
         }
@@ -28,7 +27,6 @@ pipeline{
             steps{
                 bat '''
                 docker push %IMAGE_NAME%:%TAG%
-
                 '''
             }
         }
